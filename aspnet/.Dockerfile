@@ -5,7 +5,6 @@ WORKDIR /source
 
 COPY . .
 WORKDIR /source
-RUN ls
 RUN dotnet publish -c release -o /app --no-restore
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
