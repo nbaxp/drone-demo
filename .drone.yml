@@ -47,13 +47,12 @@ steps:
   - name: publish
     image: plugins/docker
     environment:
-      PLUGIN_REGISTRY: registry.nbaxp.com
-      PLUGIN_REPO: https://registry.nbaxp.com/repository/docker/
+      PLUGIN_REGISTRY: registry.nbaxp.com/repository/docker/
+      PLUGIN_REPO: https://registry.nbaxp.com/repository/docker/demo/aspnet
     settings:
       dockerfile: aspnet/Dockerfile
       username: admin
       password: wanggang123!
-      repo: demo/aspnet
       tags:
         - latest
         - ${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}-${DRONE_REPO_BRANCH}-${DRONE_COMMIT_SHA:0:8}
