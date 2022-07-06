@@ -37,10 +37,13 @@ steps:
   - name: notify
     image: drillster/drone-email
     settings:
-      host: smtp.ym.163.com:994
+      host: smtp.ym.163.com
+      port: 994
       username: admin@nbaxp.com
       password: aA123456!
       from: admin@nbaxp.com
+depends_on:
+  - demo
 ---
 kind: pipeline
 type: docker
