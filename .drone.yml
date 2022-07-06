@@ -50,7 +50,7 @@ steps:
       PLUGIN_REGISTRY: hub.nbaxp.com
       PLUGIN_REPO: hub.nbaxp.com/demo/aspnet
     settings:
-      dockerfile: aspnet/Dockerfile
+      dockerfile: Dockerfile.aspnet
       username: admin
       password: wanggang123!
       tags:
