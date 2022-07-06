@@ -28,6 +28,10 @@ kind: pipeline
 type: docker
 name: linux-arm64
 
+platform:
+  arch: arm64
+  os: linux
+
 steps:
   - name: test
     image: alpine
