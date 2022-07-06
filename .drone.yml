@@ -48,7 +48,7 @@ steps:
     image: plugins/docker
     environment:
       PLUGIN_REGISTRY: hub.nbaxp.com
-      PLUGIN_REPO: registry.nbaxp.com/demo/aspnet
+      PLUGIN_REPO: hub.nbaxp.com/demo/aspnet
     settings:
       dockerfile: aspnet/Dockerfile
       username: admin
