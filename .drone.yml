@@ -43,6 +43,7 @@ steps:
       - cd aspnet
       - dotnet build
       - dotnet test
+      - cd ..
 
   - name: publish
     image: plugins/docker
