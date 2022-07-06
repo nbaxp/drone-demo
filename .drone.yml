@@ -47,8 +47,8 @@ steps:
   - name: publish
     image: plugins/docker
     environment:
-      PLUGIN_REGISTRY: registry.nbaxp.com/repository/docker/
-      PLUGIN_REPO: registry.nbaxp.com/repository/docker/demo/aspnet
+      PLUGIN_REGISTRY: hub.nbaxp.com
+      PLUGIN_REPO: registry.nbaxp.com/demo/aspnet
     settings:
       dockerfile: aspnet/Dockerfile
       username: admin
