@@ -1,35 +1,6 @@
 ---
 kind: pipeline
 type: docker
-name: linux-amd64
-
-platform:
-  arch: amd64
-  os: linux
-
-steps:
-  - name: test
-    image: alpine
-    commands:
-      - echo test
-
-  - name: build
-    image: alpine
-    commands:
-      - echo build
-
-  - name: publish
-    image: alpine
-    commands:
-      - echo publish
-
-trigger:
-  event:
-    - push
-    - tag
----
-kind: pipeline
-type: docker
 name: linux-arm64
 
 platform:
