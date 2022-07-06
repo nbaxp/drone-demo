@@ -1,10 +1,45 @@
+---
 kind: pipeline
 type: docker
-name: default
+name: linux-amd64
+
+platform:
+  arch: amd64
+  os: linux
 
 steps:
-- name: greeting
-  image: alpine
-  commands:
-  - echo hello
-  - echo world
+  - name: test
+    image: alpine
+    commands:
+      - echo test
+
+  - name: build
+    image: alpine
+    commands:
+      - echo build
+
+  - name: publish
+    image: alpine
+    commands:
+      - echo publish
+
+---
+kind: pipeline
+type: docker
+name: linux-arm64
+
+steps:
+  - name: test
+    image: alpine
+    commands:
+      - echo test
+
+  - name: build
+    image: alpine
+    commands:
+      - echo build
+
+  - name: publish
+    image: alpine
+    commands:
+      - echo publish
