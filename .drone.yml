@@ -42,8 +42,18 @@ steps:
       username: admin@nbaxp.com
       password: aA123456!
       from: admin@nbaxp.com
-      recipients:
-        - 76527413@qq.com
+      subject: >
+        {{#success build.status}}
+          {{repo.owner}}/{{repo.name}} ({{build.branch}}) arm64 build #{{build.number}} succeeded
+        {{else}}
+          {{repo.owner}}/{{repo.name}} ({{build.branch}}) arm64 build #{{build.number}} failed
+        {{/success}}
+      body: >
+        {{#success build.status}}
+          {{repo.owner}}/{{repo.name}} ({{build.branch}}) arm64 build #{{build.number}} succeeded: {{build.link}}
+        {{else}}
+          {{repo.owner}}/{{repo.name}} ({{build.branch}}) arm64 build #{{build.number}} failed: {{build.link}}
+        {{/success}}
 depends_on:
   - demo
 ---
