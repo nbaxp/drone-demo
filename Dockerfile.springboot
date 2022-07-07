@@ -2,7 +2,7 @@ FROM openjdk:8-jdk-alpine3.9 as build
 
 WORKDIR /source
 COPY ./springboot .
-RUN ./gradlew build
+RUN chmod +x ./gradlew && ./gradlew build
 
 FROM openjdk:8-jdk-alpine3.9
 WORKDIR /app
