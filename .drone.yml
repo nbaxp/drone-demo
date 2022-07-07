@@ -42,6 +42,8 @@ steps:
       username: admin@nbaxp.com
       password: aA123456!
       from: admin@nbaxp.com
+      recipients:
+        - 76527413@qq.com
 depends_on:
   - demo
 ---
