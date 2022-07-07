@@ -23,17 +23,6 @@ steps:
     commands:
       - echo publish
 
-trigger:
-  event:
-    - push
-    - tag
----
-# https://plugins.drone.io/plugins/email
-kind: pipeline
-type: docker
-name: notify-test
-
-steps:
   - name: notify
     image: drillster/drone-email
     settings:
@@ -42,8 +31,11 @@ steps:
       username: admin@nbaxp.com
       password: aA123456!
       from: admin@nbaxp.com
-depends_on:
-  - demo
+
+trigger:
+  event:
+    - push
+    - tag
 ---
 kind: pipeline
 type: docker
@@ -75,6 +67,4 @@ steps:
         - ${DRONE_STAGE_OS}-${DRONE_STAGE_ARCH}-${DRONE_REPO_BRANCH}-${DRONE_COMMIT_SHA:0:8}
 
 trigger:
-  event:
-    - push
-    - tag
+  event: [push, tag]
