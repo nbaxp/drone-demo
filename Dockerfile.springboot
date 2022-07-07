@@ -1,0 +1,11 @@
+FROM openjdk:8-jdk-alpine3.9 as build
+
+WORKDIR /source
+COPY ./springboot .
+RUN ./gradlew build
+
+FROM openjdk:8-jdk-alpine3.9
+WORKDIR /app
+EXPOSE 80
+COPY --from=build /source/build/libs ./
+ENTRYPOINT ["java","-jar","/app/rest-service-0.0.1-SNAPSHOT.jar"]
