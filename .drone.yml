@@ -39,10 +39,11 @@ steps:
     settings:
       host: smtp.ym.163.com
       port: 994
-      skip_verify: true
       username: admin@nbaxp.com
       password: aA123456!
-      from: admin@nbaxp.com
+      from.address: admin@nbaxp.com
+      from.name: admin
+      # skip_verify: true
 depends_on:
   - demo
 ---
