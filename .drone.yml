@@ -42,7 +42,7 @@ steps:
       username: admin@nbaxp.com
       password: aA123456!
       from: admin@nbaxp.com
-      # skip_verify: true
+      skip_verify: true
       no_starttls: true
 depends_on:
   - demo
