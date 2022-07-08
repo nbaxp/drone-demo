@@ -1,0 +1,10 @@
+FROM  node:16-alpine AS build
+
+WORKDIR /source
+COPY vue3 .
+RUN npm install && npm run build
+
+FROM nginx:stable-alpine
+WORKDIR /usr/share/nginx/html
+EXPOSE 80
+COPY --from=build /source/dist .
