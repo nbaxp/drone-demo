@@ -1,0 +1,74 @@
+kind: pipeline
+type: docker
+name: test
+
+platform:
+  arch: amd64
+  os: linux
+
+steps:
+  - name: test
+    image: docker/compose:1.29.2
+    commands:
+      - mv .env.example .env
+      - ls -a
+      - docker-compose config
+      - mv .env .env.example
+  - name: deploy
+    image: appleboy/drone-scp:linux-amd64
+    settings:
+      host: 10.10.14.176
+      port: 22
+      username: root
+      password:
+        from_secret: ssh_password
+      target: /root/publish/cicd/publish
+      source: ./
+      rm: false
+  - name: restart
+    image: appleboy/drone-ssh:linux-amd64
+    settings:
+      host: 10.10.14.176
+      port: 22
+      username: root
+      password:
+        from_secret: ssh_password
+      script:
+        - cd /root/publish/cicd/publish
+        - chmod 755 start.sh
+        - chmod 755 stop.sh
+        - ./start.sh
+        # - apt -y install git
+        # - mkdir -p ~/publish/cicd && cd $_
+        # - git init
+        # - git remoteadd origin http://10.10.14.176:3000/examples/DockerComposeCICD.git
+        # - git fetch origin +refs/heads/master
+        # - git checkout ${DRONE_COMMIT_SHA} -b ${DRONE_REPO_BRANCH}
+        #- ./start.sh
+################################################################################################
+    # frp:
+    #     image: snowdreamtech/frpc:0.37.0
+    #     restart: always
+    #     network_mode: host
+    #     volumes:
+    #         - ./conf/frp/frpc.ini:/etc/frp/frpc.ini
+    # rsync:
+    #     image: instrumentisto/rsync-ssh:alpine3.13
+    #     restart: always
+    #     volumes:
+    #         - /etc/timezone:/etc/timezone:ro
+    #         - /etc/localtime:/etc/localtime:ro
+    #         - ./conf/rsync/.ssh:/root/.ssh
+    #         - ./conf/rsync/periodic:/etc/periodic
+    #         - ${RSYNC_LOCAL}:/mnt
+    #     command: /bin/sh -c "chmod -R 400 /root/.ssh && chmod -R 755 /etc/periodic && crond -f"
+    # dnsmasq:
+    #     image: jpillora/dnsmasq:1.1.0
+    #     restart: always
+    #     cap_add:
+    #         - NET_ADMIN
+    #     ports:
+    #         - 53:53/udp
+    #         - 10000:8080
+    #     volumes:
+    #         - ./conf/dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf
